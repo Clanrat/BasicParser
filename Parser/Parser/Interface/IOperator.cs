@@ -1,5 +1,4 @@
-﻿using Parser.Converter;
-using Parser.Enums;
+﻿using Parser.Enums;
 
 namespace Parser.Interface
 {

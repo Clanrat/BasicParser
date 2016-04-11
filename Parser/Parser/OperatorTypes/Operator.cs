@@ -5,29 +5,10 @@ namespace Parser.OperatorTypes
 {
     public class Operator<T> : BaseOperator<T>
     {
+        private readonly Func<T, T, T> _func; 
         private readonly Func<T, T> _unFunc;
         public override int InputArgs { get; }
         public override bool SpecialUnary { get; }
-
-        public override T Evaluate(params T[] args)
-        {
-            if(args.Length > InputArgs)
-                throw new ArgumentException($"Too many arguments for operator {Symbol}");
-
-            if (args.Length == 1 && SpecialUnary)
-            {
-                return UnaryFunc(args[0]);
-            }
-
-            if(args.Length == InputArgs)
-            {
-                return Associativity == Associativity.L ? Function(args[1], args[0]) : Function(args[0], args[1]);
-            }
-
-            throw new ArgumentException($"Too few arguments for operator {Symbol}");
-            
-        }
-
         protected override Func<T, T> UnaryFunc
         {
             get
@@ -37,13 +18,8 @@ namespace Parser.OperatorTypes
                 return _unFunc;
             }
         }
-
-        private Func<T, T, T> Function { get; }
-
         public Operator(string symbol, int precedence, Associativity associativity, Func<T, T, T> function, bool specialUnary=false, Func<T, T> unaryFunc=null) : base(symbol, precedence, associativity)
         {
-
-            Function = function;
 
             SpecialUnary = specialUnary;
 
@@ -52,9 +28,17 @@ namespace Parser.OperatorTypes
 
             _unFunc = unaryFunc;
 
+            _func = (arg1, arg2) => Associativity == Associativity.L ? function(arg2, arg1) : function(arg1, arg2);
+
             InputArgs = 2;
+
+
         }
 
-       
+        protected override T UseOperator(T[] args)
+        {
+            return _func(args[0], args[1]);
+        }
+
     }
 }

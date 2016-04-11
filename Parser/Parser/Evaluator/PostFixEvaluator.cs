@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using Parser.Collections;
 using Parser.Evaluator.Exceptions;
@@ -71,23 +70,13 @@ namespace Parser.Evaluator
         private static void HandleSpecialUnaryOperator(Stack<double> output, IOperator<double> op)
         {                        
             var arguments = OutputHelper.GetArgumentList(1, output);
-            output.Push(op.Evaluate(arguments[0]));           
+            output.Push(op.Evaluate(arguments));           
         }
 
         private static void HandleDefaultOperatorBehaviour(Stack<double> output, IOperator<double> op)
         {
             var arguments = OutputHelper.GetArgumentList(op.InputArgs, output);
-            switch (op.InputArgs)
-            {
-                case 1:          
-                    output.Push(op.Evaluate(arguments[0]));                    
-                    break;
-                case 2:
-                    output.Push(op.Evaluate(arguments[0], arguments[1]));
-                    break;
-                default:
-                    throw new InvalidOperationException();
-            }
+            output.Push(op.Evaluate(arguments));
         }
     }
 }
