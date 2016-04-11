@@ -9,7 +9,7 @@ namespace Parser.Evaluator.Exceptions
             
         }
 
-        protected EvaluatorException() : base()
+        protected EvaluatorException()
         {
             
         }

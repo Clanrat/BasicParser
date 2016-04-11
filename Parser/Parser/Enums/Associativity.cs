@@ -1,9 +1,7 @@
 ﻿using System;
 
 namespace Parser.Enums
-{
-
-    
+{    
     [Flags]
     public enum Associativity
     {

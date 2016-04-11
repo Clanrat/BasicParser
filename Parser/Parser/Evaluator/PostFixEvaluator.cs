@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Parser.Converter;
-using Parser.Enums;
 using Parser.Evaluator.Exceptions;
 using Parser.Evaluator.Helpers;
 using Parser.Interface;
@@ -11,8 +10,6 @@ namespace Parser.Evaluator
 {
     /*
     Evaluates a space delimeted string of a mathematical function written in reverse polish notation
-
-        
     */
     public class PostFixEvaluator : IEvaluator<double>
     {
@@ -56,8 +53,7 @@ namespace Parser.Evaluator
         private void EvaluateOperator(string token, Stack<double> output)
         {
             var op = Ops[token];
-            
-            
+                     
             var outputLeft = output.Count;
             if (outputLeft < op.InputArgs && (outputLeft < 1 && !op.SpecialUnary))
                 throw new InvalidInputException();
@@ -69,29 +65,22 @@ namespace Parser.Evaluator
             else
             {
                 HandleDefaultOperatorBehaviour(output, op);
-            }
-
-            
+            }            
         }
 
         private static void HandleSpecialUnaryOperator(Stack<double> output, IOperator<double> op)
-        {
-                        
+        {                        
             var arguments = OutputHelper.GetArgumentList(1, output);
-            output.Push(op.Evaluate(arguments[0]));
-            
+            output.Push(op.Evaluate(arguments[0]));           
         }
 
         private static void HandleDefaultOperatorBehaviour(Stack<double> output, IOperator<double> op)
         {
             var arguments = OutputHelper.GetArgumentList(op.InputArgs, output);
-
-
             switch (op.InputArgs)
             {
                 case 1:          
-                    output.Push(op.Evaluate(arguments[0]));
-                    
+                    output.Push(op.Evaluate(arguments[0]));                    
                     break;
                 case 2:
                     output.Push(op.Evaluate(arguments[0], arguments[1]));

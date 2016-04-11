@@ -1,8 +1,5 @@
 using System;
-using System.Threading;
-using Parser.Converter;
 using Parser.Enums;
-using Parser.Interface;
 
 namespace Parser.OperatorTypes
 {
@@ -16,8 +13,6 @@ namespace Parser.OperatorTypes
         {
             if(args.Length > InputArgs)
                 throw new ArgumentException($"Too many arguments for operator {Symbol}");
-
-
 
             if (args.Length == 1 && SpecialUnary)
             {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Parser.Converter;
 using Parser.Evaluator;
 using Parser.Interface;

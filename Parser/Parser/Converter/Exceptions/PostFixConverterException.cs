@@ -9,7 +9,7 @@ namespace Parser.Converter.Exceptions
             
         }
 
-        protected PostFixConverterException() : base()
+        protected PostFixConverterException()
         {
             
         }
@@ -22,7 +22,7 @@ namespace Parser.Converter.Exceptions
         {
         }
 
-        public MissMatchedParenthesisException() : base()
+        public MissMatchedParenthesisException()
         {
             
         }
@@ -36,7 +36,7 @@ namespace Parser.Converter.Exceptions
             
         }
 
-        public InvalidFormatException() : base()
+        public InvalidFormatException()
         {
             
         }
