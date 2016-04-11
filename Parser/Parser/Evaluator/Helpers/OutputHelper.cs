@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace Parser.Evaluator.Helpers
 {
-    public static class OutputHelper
+    internal static class OutputHelper
     {
+        //Gets the next numberOfArguments items from the output stack
         public static List<T> GetArgumentList<T>(int numberOfArguments, Stack<T> output)
         {
             var result = new List<T>();

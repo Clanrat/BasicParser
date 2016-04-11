@@ -10,6 +10,11 @@ using Parser.OperatorTypes;
 
 namespace Parser.Evaluator
 {
+    /*
+    Evaluates a space delimeted string of a mathematical function written in reverse polish notation
+
+        
+    */
     public class PostFixEvaluator : IEvaluator<double>
     {
         private OperatorCollection Ops { get; }
@@ -27,6 +32,12 @@ namespace Parser.Evaluator
             return InternalEval(splitInput);
         }
 
+        /*
+        Evaluates the input in the format of an Ienumerable, 
+        Iterates over the Ienumerable checking if each token is an operator. 
+        If not it gets pushed to the output stack.
+        Operators evaluates the items on the output stack and then push them back onto it          
+        */
         private double InternalEval(IEnumerable<string> input)
         {
             var output = new Stack<double>();
