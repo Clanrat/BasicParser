@@ -1,7 +1,9 @@
-﻿namespace Parser.Interface
+﻿using System.Collections.Generic;
+
+namespace Parser.Interface
 {
     public interface IPostFixConverter
     {
-        string Convert(string input);
+        List<string> Convert(string input);
     }
 }

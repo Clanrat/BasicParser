@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Parser.Converter;
 using Parser.Evaluator;
 using Parser.Interface;
@@ -39,7 +40,7 @@ namespace Parser.FunctionParser
         {
 
             var convertedInput = Converter.Convert(input);
-            var result = Evaluator.Eval(convertedInput);
+            var result = Evaluator.Eval(string.Join(" ",convertedInput));
 
             return result;
         }

@@ -3,6 +3,11 @@ using Parser.Interface;
 
 namespace Parser.Converter
 {
+    /*
+    Collection of operators, stored internally in a dictionary, with the symbol being the key
+
+
+    */
     public class OperatorCollection
     {
         private Dictionary<string, IOperator> Ops { get; } = new Dictionary<string, IOperator>();

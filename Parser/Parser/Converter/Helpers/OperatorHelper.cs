@@ -3,7 +3,7 @@ using Parser.Interface;
 
 namespace Parser.Converter.Helpers
 {
-    public static class OperatorHelper
+    internal static class OperatorHelper
     {
         public static bool CheckAssociativity(IOperator op, Associativity val)
         {

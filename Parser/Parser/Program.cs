@@ -16,17 +16,7 @@ namespace Parser
     {
         static void Main(string[] args)
         {
-            var Ops = new List<IOperator>
-            {   
-            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, true, a => +a),
-            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, true, a => -a),
-            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b),
-            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b),
-            new Operator<double>("^", 2, Associativity.L, Math.Pow)
-
-            };
-
-            var parser = new SimpleParser(Ops);
+            var parser = new SimpleParser();
             do
             {
                 Console.WriteLine("Input:");

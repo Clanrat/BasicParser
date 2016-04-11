@@ -37,13 +37,13 @@ namespace Parser.Converter
             Separators = decimalSeparators.ToCharArray();
         }
 
-        public string Convert(string input)
+        public List<string> Convert(string input)
         {
             input = Regex.Replace(input, @"\s+", "");
             return InternalConvert(input);
         }
 
-        private string InternalConvert(string input)
+        private List<string> InternalConvert(string input)
         {
             var result = new List<string>();
 
@@ -53,7 +53,7 @@ namespace Parser.Converter
             {
                 var partialToken = inputQueue.Dequeue(); //Get the next in line to be parsed
 
-                var numberToken = CheckNumber(partialToken, inputQueue); //Checks if number, empty string if not
+                var numberToken = CheckIfNumber(partialToken, inputQueue); //Checks if number, empty string if not
                 if (numberToken != "")
                 {
                     QueueHelper.RemoveFromQueue(numberToken.Length - 1, inputQueue); //Remove the items that have already been parsed from the input queue
@@ -62,7 +62,7 @@ namespace Parser.Converter
                 else
                 {
                     //Checks for operator, returns a stack of possible operators, the top member of the token stack will be the one used
-                    var operatorTokens = CheckOperator(partialToken, inputQueue); 
+                    var operatorTokens = CheckIfOperator(partialToken, inputQueue); 
 
                     
                     if (operatorTokens.Count != 0)
@@ -88,20 +88,23 @@ namespace Parser.Converter
 
                 result.Add(item);
             }
-            return string.Join(" ", result);
+            return result;
         }
 
         private void FoundSpecialChar(char partialToken, List<string> result)
         {
             switch (partialToken)
             {
-                case '(':
+                case '(': 
                     Hold.Push(partialToken.ToString());
                     return;
 
                 case ')':
+                    /*
+                    Pop operators from the stack until a matching parenthesis is found
+                    */
 
-                    var foundLeftParenthesis = false;
+                    var foundLeftParenthesis = false; 
                     
                     do
                     {
@@ -123,7 +126,13 @@ namespace Parser.Converter
                     throw new UnexpectedOperatorException($"Unexpected Operator {partialToken}");
             }
         }
-        private Stack<string> CheckOperator(char partialToken, IEnumerable<char> inputQueue)
+
+        /*
+        Checks if the current token is part of a larger operator name 
+        returns a stack of matched operators with the one with the longest name on the top
+        Looks ahead in the inputQueue to find the entire operator
+        */
+        private Stack<string> CheckIfOperator(char partialToken, IEnumerable<char> inputQueue) 
         {
             var matchedOperators = new Stack<string>();
             var operatorToken = partialToken.ToString();
@@ -141,6 +150,9 @@ namespace Parser.Converter
             return matchedOperators;
         }
 
+        /*
+        Pushes the current operator token to the stack and pops operators from the stack
+        */
         private void FoundOperator(string token, List<string> result)
         {
             var op = Operators[token];
@@ -165,7 +177,10 @@ namespace Parser.Converter
             Hold.Push(token);
         }
 
-        private string CheckNumber(char partialToken, IEnumerable<char> inputQueue)
+        /*
+        Looks ahead in the input queue to parse an entire number
+        */
+        private string CheckIfNumber(char partialToken, IEnumerable<char> inputQueue)
         {
             var numberToken = partialToken.ToString();
             if (!(char.IsDigit(partialToken) || partialToken == '.'))

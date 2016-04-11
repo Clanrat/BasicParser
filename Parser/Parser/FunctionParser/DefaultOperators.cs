@@ -22,7 +22,6 @@ namespace Parser.FunctionParser
             new UnaryOperator<double>("asin", 1, Associativity.L, Math.Asin),
             new UnaryOperator<double>("acos", 1, Associativity.L, Math.Acos),
             new UnaryOperator<double>("atan", 1, Associativity.L, Math.Atan)
-
         }); 
 
 
