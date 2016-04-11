@@ -85,6 +85,15 @@ namespace TestParser
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void TestMultipleParenthesis()
+        {
+            var converter = new PostFixConverter(new OperatorCollection(Ops));
+            var result = converter.Convert("7 * ((2 + 3) * 4)");
+            var expected = "7 2 3 + 4 * *";
+            Assert.AreEqual(expected, result);
+        }
+
         [ExpectedException(typeof (InvalidFormatException))]
         [TestMethod]
         public void TestMultipleDecimalPoints()

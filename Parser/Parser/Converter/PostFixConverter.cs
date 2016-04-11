@@ -122,7 +122,6 @@ namespace Parser.Converter
                     throw new UnknownOperatorException($"Unknown Operator {partialToken}");
             }
         }
-
         private Stack<string> CheckOperator(char partialToken, IEnumerable<char> inputQueue)
         {
             var matchedOperators = new Stack<string>();
@@ -139,7 +138,6 @@ namespace Parser.Converter
                 operatorToken += token;
             }
             return matchedOperators;
-
         }
 
         private void FoundOperator(string token, List<string> result)
