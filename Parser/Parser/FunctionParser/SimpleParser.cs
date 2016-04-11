@@ -28,6 +28,13 @@ namespace Parser.FunctionParser
             Converter = new PostFixConverter(new OperatorCollection(ops));
         }
 
+        public SimpleParser()
+        {
+            var operators = DefaultOperators.Operators;
+            Evaluator = new PostFixEvaluator(operators);
+            Converter = new PostFixConverter(operators);
+        }
+
         public double Parse(string input)
         {
 
