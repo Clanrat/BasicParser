@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Parser.Collections;
 using Parser.Converter;
 using Parser.Evaluator;
@@ -43,6 +44,21 @@ namespace Parser.FunctionParser
             var result = Evaluator.Eval(string.Join(" ",convertedInput));
 
             return result;
+        }
+
+        public double Parse(string input, params string[] args)
+        {
+            if (args.Length%2 != 0)
+            {
+                throw new ArgumentException("Missing input argument");
+            }
+
+            for (var index = 0; index < args.Length; index += 2)
+            {
+                input = input.Replace(args[index], args[index + 1]);
+            }
+
+            return Parse(input);
         }
     }
 }

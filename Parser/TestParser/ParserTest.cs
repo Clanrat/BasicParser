@@ -28,5 +28,14 @@ namespace TestParser
             var expected = 6;
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void TestSymbolEval()
+        {
+            var parser = new SimpleParser();
+            var result = parser.Parse("2+x+3", "x", "2");
+            var expected = 7;
+            Assert.AreEqual(expected, result);
+        }
     }
 }

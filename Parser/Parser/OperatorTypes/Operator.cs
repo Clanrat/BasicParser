@@ -31,8 +31,6 @@ namespace Parser.OperatorTypes
             _func = (arg1, arg2) => Associativity == Associativity.L ? function(arg2, arg1) : function(arg1, arg2);
 
             InputArgs = 2;
-
-
         }
 
         protected override T UseOperator(T[] args)
