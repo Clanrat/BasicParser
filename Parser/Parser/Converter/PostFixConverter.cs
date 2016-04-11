@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Parser.Collections;
 using Parser.Converter.Exceptions;
 using Parser.Converter.Helpers;
 using Parser.Enums;

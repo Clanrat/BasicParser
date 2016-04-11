@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Parser.Converter;
+using Parser.Collections;
 using Parser.Enums;
 using Parser.Evaluator;
-using Parser.Evaluator.Exceptions;
 using Parser.Interface;
 using Parser.OperatorTypes;
 

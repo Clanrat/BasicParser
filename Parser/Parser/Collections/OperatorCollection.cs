@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Parser.Interface;
 
-namespace Parser.Converter
+namespace Parser.Collections
 {
     /*
     Collection of operators, stored internally in a dictionary, with the symbol being the key

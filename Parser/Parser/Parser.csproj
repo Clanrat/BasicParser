@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\OperatorCollection.cs" />
     <Compile Include="Converter\Exceptions\PostFixConverterException.cs" />
     <Compile Include="Converter\Helpers\OperatorHelper.cs" />
     <Compile Include="Converter\Helpers\QueueHelper.cs" />
     <Compile Include="Converter\Helpers\TokenHelper.cs" />
-    <Compile Include="Converter\OperatorCollection.cs" />
     <Compile Include="Converter\PostFixConverter.cs" />
     <Compile Include="Enums\Associativity.cs" />
     <Compile Include="Evaluator\Exceptions\EvaluatorException.cs" />
