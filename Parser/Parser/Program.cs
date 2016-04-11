@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Parser.Converter;
-using Parser.Enums;
 using Parser.FunctionParser;
-using Parser.Interface;
-using Parser.OperatorTypes;
 
 namespace Parser
 {
@@ -16,6 +7,7 @@ namespace Parser
     {
         static void Main(string[] args)
         {
+            
             var parser = new SimpleParser();
             do
             {
@@ -25,6 +17,7 @@ namespace Parser
                 Console.WriteLine($"Result: {result}\n");
 
             } while (true);
+            
         }
     }
 }
