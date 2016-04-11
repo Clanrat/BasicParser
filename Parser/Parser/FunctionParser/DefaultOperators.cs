@@ -9,7 +9,7 @@ namespace Parser.FunctionParser
 {
     public static class DefaultOperators
     {
-        public static OperatorCollection Operators = new OperatorCollection(new List<IOperator>
+        public static OperatorCollection<double> Operators = new OperatorCollection<double>(new List<IOperator<double>>
         {
             new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, true, a => +a),
             new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, true, a => -a),

@@ -13,7 +13,7 @@ namespace TestParser
     [TestClass]
     public class EvaluatorTest
     {
-        public List<IOperator> Ops = new List<IOperator>
+        public List<IOperator<double>> Ops = new List<IOperator<double>>
         {
             new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, true, a => +a),
             new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, true, a => -a),
@@ -25,7 +25,7 @@ namespace TestParser
         [TestMethod]
         public void TestBasicEval()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection(Ops));
+            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
             var result = evaluator.Eval("1 2 +");
             var expected = 3;
             Assert.AreEqual(expected, result);
@@ -35,7 +35,7 @@ namespace TestParser
         [TestMethod]
         public void TestUnaryOperators()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection(Ops));
+            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
             var result = evaluator.Eval("1 -");
             var expected = -1;
             Assert.AreEqual(expected, result);
@@ -44,7 +44,7 @@ namespace TestParser
         [TestMethod]
         public void TestAssociativity()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection(Ops));
+            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
             var result = evaluator.Eval("1 2 -");
             var expected = -1;
         }
@@ -53,7 +53,7 @@ namespace TestParser
         [TestMethod]
         public void TestInvalidInput()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection(Ops));
+            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
             var result = evaluator.Eval("+ 1 +");
             Console.WriteLine(result);
         }

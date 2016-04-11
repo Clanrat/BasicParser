@@ -30,8 +30,8 @@ namespace Parser.Converter
     {
         private char[] Separators { get;}
         private Stack<string> Hold { get; } = new Stack<string>();
-        private OperatorCollection Operators { get;}
-        public PostFixConverter(OperatorCollection operators, string decimalSeparators=".,")
+        private OperatorCollection<double> Operators { get;}
+        public PostFixConverter(OperatorCollection<double> operators, string decimalSeparators=".,")
         {
             Operators = operators;
             Separators = decimalSeparators.ToCharArray();

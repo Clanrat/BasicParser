@@ -8,10 +8,10 @@ namespace Parser.Converter
 
 
     */
-    public class OperatorCollection
+    public class OperatorCollection<T>
     {
-        private Dictionary<string, IOperator> Ops { get; } = new Dictionary<string, IOperator>();
-        public OperatorCollection(IEnumerable<IOperator> operators)
+        private Dictionary<string, IOperator<T>> Ops { get; } = new Dictionary<string, IOperator<T>>();
+        public OperatorCollection(IEnumerable<IOperator<T>> operators)
         {
             foreach (var op in operators)
             {
@@ -19,7 +19,7 @@ namespace Parser.Converter
             }
         }
 
-        public IOperator this[string key] => Ops[key];
+        public IOperator<T> this[string key] => Ops[key];
 
         public bool OperatorExists(string symbol)
         {

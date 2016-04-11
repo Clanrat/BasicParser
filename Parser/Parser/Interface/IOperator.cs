@@ -3,7 +3,7 @@ using Parser.Enums;
 
 namespace Parser.Interface
 {
-    public interface IOperator
+    public interface IOperator<T>
     {
         string Symbol { get; }
 
@@ -14,5 +14,7 @@ namespace Parser.Interface
         int InputArgs { get; }
 
         bool SpecialUnary { get; }
+
+        T Evaluate(params T[] args);
     }
 }

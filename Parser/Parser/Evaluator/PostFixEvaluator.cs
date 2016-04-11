@@ -6,7 +6,6 @@ using Parser.Enums;
 using Parser.Evaluator.Exceptions;
 using Parser.Evaluator.Helpers;
 using Parser.Interface;
-using Parser.OperatorTypes;
 
 namespace Parser.Evaluator
 {
@@ -17,10 +16,10 @@ namespace Parser.Evaluator
     */
     public class PostFixEvaluator : IEvaluator<double>
     {
-        private OperatorCollection Ops { get; }
+        private OperatorCollection<double> Ops { get; }
 
 
-        public PostFixEvaluator(OperatorCollection ops)
+        public PostFixEvaluator(OperatorCollection<double> ops)
         {
             Ops = ops;
         }
@@ -75,56 +74,31 @@ namespace Parser.Evaluator
             
         }
 
-        private static void HandleSpecialUnaryOperator(Stack<double> output, IOperator op)
+        private static void HandleSpecialUnaryOperator(Stack<double> output, IOperator<double> op)
         {
-            var unOp = op as BaseOperator<double>;
-            if (unOp == null)
-                OnCastError(op, typeof (BaseOperator<>));
-            else
-            {
-                var arguments = OutputHelper.GetArgumentList(1, output);
-                output.Push(unOp.UnaryFunc(arguments[0]));
-            }
+                        
+            var arguments = OutputHelper.GetArgumentList(1, output);
+            output.Push(op.Evaluate(arguments[0]));
+            
         }
 
-        private static void HandleDefaultOperatorBehaviour(Stack<double> output, IOperator op)
+        private static void HandleDefaultOperatorBehaviour(Stack<double> output, IOperator<double> op)
         {
             var arguments = OutputHelper.GetArgumentList(op.InputArgs, output);
 
 
             switch (op.InputArgs)
             {
-                case 1:
-
-                    var unOp = op as UnaryOperator<double>;
-                    if (unOp == null)
-                        OnCastError(op, typeof (UnaryOperator<>));
-                    else
-                    {
-                        output.Push(unOp.Function(arguments[0]));
-                    }
+                case 1:          
+                    output.Push(op.Evaluate(arguments[0]));
+                    
                     break;
                 case 2:
-
-                    var biOp = op as Operator<double>;
-                    if (biOp == null)
-                        OnCastError(op, typeof (Operator<>));
-                    else
-                    {
-                        output.Push(biOp.Associativity == Associativity.L
-                            ? biOp.Function(arguments[1], arguments[0])
-                            : biOp.Function(arguments[0], arguments[1]));
-                    }
+                    output.Push(op.Evaluate(arguments[0], arguments[1]));
                     break;
                 default:
                     throw new InvalidOperationException();
             }
-        }
-
-
-        private static void OnCastError(IOperator op, Type t)
-        {
-            throw new InvalidCastException($"Could not cast {op.Symbol} as {t}");
         }
     }
 }

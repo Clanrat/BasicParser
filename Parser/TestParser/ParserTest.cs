@@ -11,7 +11,7 @@ namespace TestParser
     [TestClass]
     public class ParserTest
     {
-        public List<IOperator> Ops = new List<IOperator>
+        public List<IOperator<double>> Ops = new List<IOperator<double>>
         {
             new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
             new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),

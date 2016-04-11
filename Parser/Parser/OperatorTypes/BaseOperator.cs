@@ -4,14 +4,15 @@ using Parser.Interface;
 
 namespace Parser.OperatorTypes
 {
-    public abstract class BaseOperator<T> : IOperator
+    public abstract class BaseOperator<T> : IOperator<T>
     {
         public string Symbol { get; }
         public int Precedence { get; }
         public Associativity Associativity { get; }
         public abstract int InputArgs { get; }
         public abstract bool SpecialUnary { get; }
-        public abstract Func<T, T> UnaryFunc { get; } 
+        public abstract T Evaluate(params T[] args);
+        protected abstract Func<T, T> UnaryFunc { get; } 
 
         protected BaseOperator(string symbol, int precedence, Associativity associativity)
         {

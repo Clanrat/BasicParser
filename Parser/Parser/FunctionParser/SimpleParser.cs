@@ -17,16 +17,16 @@ namespace Parser.FunctionParser
             Converter = converter;
         }
 
-        public SimpleParser(OperatorCollection ops)
+        public SimpleParser(OperatorCollection<double> ops)
         {
             Evaluator = new PostFixEvaluator(ops);
             Converter = new PostFixConverter(ops);
         }
 
-        public SimpleParser(List<IOperator> ops)
+        public SimpleParser(List<IOperator<double>> ops)
         {
-            Evaluator = new PostFixEvaluator(new OperatorCollection(ops));
-            Converter = new PostFixConverter(new OperatorCollection(ops));
+            Evaluator = new PostFixEvaluator(new OperatorCollection<double>(ops));
+            Converter = new PostFixConverter(new OperatorCollection<double>(ops));
         }
 
         public SimpleParser()

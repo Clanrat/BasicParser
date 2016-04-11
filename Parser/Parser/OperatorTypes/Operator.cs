@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Parser.Converter;
 using Parser.Enums;
 using Parser.Interface;
@@ -11,7 +12,28 @@ namespace Parser.OperatorTypes
         public override int InputArgs { get; }
         public override bool SpecialUnary { get; }
 
-        public override Func<T, T> UnaryFunc
+        public override T Evaluate(params T[] args)
+        {
+            if(args.Length > InputArgs)
+                throw new ArgumentException($"Too many arguments for operator {Symbol}");
+
+
+
+            if (args.Length == 1 && SpecialUnary)
+            {
+                return UnaryFunc(args[0]);
+            }
+
+            if(args.Length == InputArgs)
+            {
+                return Associativity == Associativity.L ? Function(args[1], args[0]) : Function(args[0], args[1]);
+            }
+
+            throw new ArgumentException($"Too few arguments for operator {Symbol}");
+            
+        }
+
+        protected override Func<T, T> UnaryFunc
         {
             get
             {
@@ -21,7 +43,7 @@ namespace Parser.OperatorTypes
             }
         }
 
-        public Func<T, T, T> Function { get; }
+        private Func<T, T, T> Function { get; }
 
         public Operator(string symbol, int precedence, Associativity associativity, Func<T, T, T> function, bool specialUnary=false, Func<T, T> unaryFunc=null) : base(symbol, precedence, associativity)
         {
