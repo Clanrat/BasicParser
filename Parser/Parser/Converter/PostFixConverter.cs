@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Parser.Converter.Exceptions;
 using Parser.Converter.Helpers;
 using Parser.Enums;
+using Parser.Interface;
 
 namespace Parser.Converter
 {
@@ -25,7 +26,7 @@ namespace Parser.Converter
     Output:
     5 5 +
     */
-    public class PostFixConverter
+    public class PostFixConverter : IPostFixConverter
     {
         private char[] Separators { get;}
         private Stack<string> Hold { get; } = new Stack<string>();
@@ -119,7 +120,7 @@ namespace Parser.Converter
 
                     break;
                 default:
-                    throw new UnknownOperatorException($"Unknown Operator {partialToken}");
+                    throw new UnexpectedOperatorException($"Unexpected Operator {partialToken}");
             }
         }
         private Stack<string> CheckOperator(char partialToken, IEnumerable<char> inputQueue)

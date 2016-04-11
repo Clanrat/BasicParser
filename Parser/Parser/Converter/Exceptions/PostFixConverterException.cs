@@ -42,9 +42,9 @@ namespace Parser.Converter.Exceptions
         }
     }
 
-    public class UnknownOperatorException : PostFixConverterException
+    public class UnexpectedOperatorException : PostFixConverterException
     {
-        public UnknownOperatorException(string message) : base(message)
+        public UnexpectedOperatorException(string message) : base(message)
         {
             
         }

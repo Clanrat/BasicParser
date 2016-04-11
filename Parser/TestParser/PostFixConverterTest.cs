@@ -14,10 +14,10 @@ namespace TestParser
     {
         public List<IOperator> Ops = new List<IOperator>
         {
-            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b),
-            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b),
-            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b),
-            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b)
+            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
+            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),
+            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b, false),
+            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b, false)
             
         };
 
@@ -60,9 +60,9 @@ namespace TestParser
         {
             var operators = new List<IOperator>
             {
-                new Operator<double>("+",1, Associativity.B, (a,b) => a * b),
-                new Operator<double>("*",2, Associativity.B, (a,b) => a * b),
-                new Operator<double>("sin",1, Associativity.R, (a,b) => a * b)
+                new Operator<double>("+",1, Associativity.B, (a,b) => a * b, false),
+                new Operator<double>("*",2, Associativity.B, (a,b) => a * b, false),
+                new UnaryOperator<double>("sin",1, Associativity.R, Math.Sin)
             };
             var converter = new PostFixConverter(new OperatorCollection(operators));
             var result = converter.Convert("2+sin(2)");
@@ -114,9 +114,10 @@ namespace TestParser
 
         }
 
+        
 
 
-        [ExpectedException(typeof (UnknownOperatorException))]
+        [ExpectedException(typeof (UnexpectedOperatorException))]
         [TestMethod]
         public void TestUnknownOperator()
         {

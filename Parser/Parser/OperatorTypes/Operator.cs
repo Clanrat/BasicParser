@@ -5,29 +5,39 @@ using Parser.Interface;
 
 namespace Parser.OperatorTypes
 {
-    public class Operator<T> : IOperator
+    public class Operator<T> : BaseOperator<T>
     {
-        public string Symbol { get; }
-        public int Precedence { get; }
-        public Associativity Associativity { get; }
-        public bool Unary { get; }
+        private readonly Func<T, T> _unFunc;
+        public override int InputArgs { get; }
+        public override bool SpecialUnary { get; }
+
+        public override Func<T, T> UnaryFunc
+        {
+            get
+            {
+                if(!SpecialUnary)
+                    throw new ArgumentException("Trying to use operator in unary function but operator cannot be unary");
+                return _unFunc;
+            }
+        }
 
         public Func<T, T, T> Function { get; }
 
-        public Operator(string symbol, int precedence, Associativity associativity, Func<T, T, T> function)
+        public Operator(string symbol, int precedence, Associativity associativity, Func<T, T, T> function, bool specialUnary=false, Func<T, T> unaryFunc=null) : base(symbol, precedence, associativity)
         {
-            Symbol = symbol;
-
-            if(precedence <= 0)
-                throw new ArgumentException("Precedence must be above 0");
-
-            Precedence = precedence;
-
-            Associativity = associativity;
 
             Function = function;
 
-            Unary = false;
-        }   
+            SpecialUnary = specialUnary;
+
+            if(specialUnary && unaryFunc == null)
+                throw new ArgumentException("Expected A special unary function");
+
+            _unFunc = unaryFunc;
+
+            InputArgs = 2;
+        }
+
+       
     }
 }

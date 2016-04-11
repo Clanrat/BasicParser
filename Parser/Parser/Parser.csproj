@@ -50,10 +50,16 @@
     <Compile Include="Converter\OperatorCollection.cs" />
     <Compile Include="Converter\PostFixConverter.cs" />
     <Compile Include="Enums\Associativity.cs" />
+    <Compile Include="Evaluator\Exceptions\EvaluatorException.cs" />
+    <Compile Include="Evaluator\Helpers\OutputHelper.cs" />
     <Compile Include="Evaluator\PostFixEvaluator.cs" />
+    <Compile Include="Interface\IEvaluator.cs" />
     <Compile Include="Interface\IOperator.cs" />
+    <Compile Include="Interface\IPostFixConverter.cs" />
+    <Compile Include="OperatorTypes\BaseOperator.cs" />
     <Compile Include="OperatorTypes\Operator.cs" />
     <Compile Include="OperatorTypes\UnaryOperator.cs" />
+    <Compile Include="FunctionParser\SimpleParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

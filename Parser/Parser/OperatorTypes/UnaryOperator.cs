@@ -5,32 +5,23 @@ using Parser.Interface;
 
 namespace Parser.OperatorTypes
 {
-    public class UnaryOperator<T> : IOperator
+    public class UnaryOperator<T> : BaseOperator<T>
     {
-        public string Symbol { get; }
+        private Func<T, T> _func; 
+        public override int InputArgs { get; }
+        public override bool SpecialUnary { get; }
 
-        public int Precedence { get; }
+        public override Func<T, T> UnaryFunc => _func;
 
-        public Associativity Associativity { get; }
+        public Func<T, T> Function => _func;
 
-        public bool Unary { get; }
-
-        public Func<T, T> Function { get; } 
-
-        public UnaryOperator(string symbol, int precedence, Associativity associativity, Func<T, T> function)
+        public UnaryOperator(string symbol, int precedence, Associativity associativity, Func<T, T> function): base(symbol, precedence, associativity)
         {
-            Symbol = symbol;
+            _func = function;
 
-            if (precedence <= 0)
-                throw new ArgumentException("Precedence must be above 0");
+            SpecialUnary = false; //It's always unary
 
-            Precedence = precedence;
-
-            Associativity = associativity;
-
-            Function = function;
-
-            Unary = false;
+            InputArgs = 1;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace Parser.Converter
         private Dictionary<string, IOperator> Ops { get; } = new Dictionary<string, IOperator>();
         public OperatorCollection(IEnumerable<IOperator> operators)
         {
-
             foreach (var op in operators)
             {
                 Ops.Add(op.Symbol, op);

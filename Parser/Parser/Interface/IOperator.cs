@@ -11,6 +11,8 @@ namespace Parser.Interface
 
         Associativity Associativity { get;}
 
-        bool Unary { get; }
+        int InputArgs { get; }
+
+        bool SpecialUnary { get; }
     }
 }
