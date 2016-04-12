@@ -17,7 +17,7 @@ namespace Parser.OperatorTypes.BaseTypes.Function
 
         protected override T UseOperator(T[] args)
         {
-            return _func(args[0], args[1], args[3]);
+            return _func(args[0], args[1], args[2]);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Parser.OperatorTypes.BaseTypes
         public Associativity Associativity { get; }
         public int InputArgs { get; }
         public bool SpecialUnary { get; }
-        private Func<T, T> UnaryFunc
+        protected Func<T, T> UnaryFunc
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Parser.OperatorTypes.BaseTypes
         {
             return ValidateAndExecute(args);
         }
-        private T ValidateAndExecute(T[] args)
+        protected virtual T ValidateAndExecute(T[] args)
         {
             if (args.Length > InputArgs)
                 throw new ArgumentException($"Too many arguments for evaluatable {Symbol}");

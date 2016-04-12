@@ -23,6 +23,7 @@ namespace Parser.FunctionParser
             new Function<double>("asin", 3, Math.Asin),
             new Function<double>("acos", 3, Math.Acos),
             new Function<double>("atan", 3, Math.Atan),
+            new Function<double>("f",3,(a, b) => a - b)
         }); 
 
 
