@@ -31,6 +31,8 @@ To add new operators all that is needed is to instanciate any derived type of th
 ```C#
 
 var addition = new Operator<double>("+", 1, Assosiativity.B, (a, b) => a + b, true, (a) => +a);
+or for functions
+var sin = new Function<double>("sin", 3, Math.Sin);
 ```
 `symbol` : the symbol that you want your operator to be represented by can be any char except: , . ( ) or any digit
 
