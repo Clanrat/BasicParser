@@ -22,49 +22,49 @@ namespace Parser.OperatorTypes
         {
             _func = function;
         } 
-        public Function(string symbol, int precedence, int inputArgs, Func<T, T> function)
+        public Function(string symbol, int precedence, Func<T, T> function)
         {
-            _func = new Function1Arg<T>(symbol, precedence, inputArgs, function);
+            _func = new Function1Arg<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T, T> function)
         {
             _func = new Function1Arg<T>(p, function);
         }
-        public Function(string symbol, int precedence, int inputArgs, Func<T,T,T> function)
+        public Function(string symbol, int precedence, Func<T,T,T> function)
         {
-            _func = new Function2Args<T>(symbol, precedence, inputArgs, function);
+            _func = new Function2Args<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T,T,T> function)
         {
             _func = new Function2Args<T>(p, function);
         }
-        public Function(string symbol, int precedence, int inputArgs, Func<T,T,T,T> function)
+        public Function(string symbol, int precedence, Func<T,T,T,T> function)
         {
-            _func = new Function3Args<T>(symbol, precedence, inputArgs, function);
+            _func = new Function3Args<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T,T,T,T> function)
         {
             _func = new Function3Args<T>(p, function);
         }
-        public Function(string symbol, int precedence, int inputArgs, Func<T, T, T, T, T> function)
+        public Function(string symbol, int precedence, Func<T, T, T, T, T> function)
         {
-            _func = new Function4Args<T>(symbol, precedence, inputArgs, function);
+            _func = new Function4Args<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T, T, T, T, T> function)
         {
             _func = new Function4Args<T>(p, function);
         }
-        public Function(string symbol, int precedence, int inputArgs, Func<T, T, T, T, T, T> function)
+        public Function(string symbol, int precedence, Func<T, T, T, T, T, T> function)
         {
-            _func = new Function5Args<T>(symbol, precedence, inputArgs, function);
+            _func = new Function5Args<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T, T, T, T, T, T> function)
         {
             _func = new Function5Args<T>(p, function);
         }
-        public Function(string symbol, int precedence, int inputArgs, Func<T, T, T, T, T, T, T> function)
+        public Function(string symbol, int precedence, Func<T, T, T, T, T, T, T> function)
         {
-            _func = new Function6Args<T>(symbol, precedence, inputArgs, function);
+            _func = new Function6Args<T>(symbol, precedence, function);
         }
         public Function(EvaluatableParamters p, Func<T, T, T, T, T, T, T> function)
         {

@@ -16,10 +16,10 @@ namespace TestParser
     {
         public List<IEvaluatable<double>> Ops = new List<IEvaluatable<double>>
         {
-            new Operator2Args<double>("+", 1, Associativity.B, (a, b) => a + b, false),
-            new Operator2Args<double>("-", 1, Associativity.L, (a, b) => a - b, false),
-            new Operator2Args<double>("*", 2, Associativity.B, (a, b) => a * b, false),
-            new Operator2Args<double>("/", 2, Associativity.L, (a, b) => a / b, false)
+            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
+            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),
+            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b, false),
+            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b, false)
             
         };
 
@@ -62,9 +62,9 @@ namespace TestParser
         {
             var operators = new List<IEvaluatable<double>>
             {
-                new Operator2Args<double>("+",1, Associativity.B, (a,b) => a * b, false),
-                new Operator2Args<double>("*",2, Associativity.B, (a,b) => a * b, false),
-                new Operator1Arg<double>("sin",1, Associativity.R, Math.Sin)
+                new Operator<double>("+",1, Associativity.B, (a,b) => a * b, false),
+                new Operator<double>("*",2, Associativity.B, (a,b) => a * b, false),
+                new Operator<double>("sin",1, Associativity.R, Math.Sin)
             };
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));
             var result = string.Join(" ", converter.Convert("2+sin(2)"));
@@ -77,8 +77,8 @@ namespace TestParser
         {
             var operators = new List<IEvaluatable<double>>
             {
-                new Operator2Args<double>("*",2, Associativity.B, (a,b) => a * b),
-                new Operator2Args<double>("**",2, Associativity.B, (a,b) => a * b)
+                new Operator<double>("*",2, Associativity.B, (a,b) => a * b),
+                new Operator<double>("**",2, Associativity.B, (a,b) => a * b)
             };
 
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));
@@ -92,8 +92,8 @@ namespace TestParser
         {
             var operators = new List<IEvaluatable<double>>
             {
-                new Operator2Args<double>("f",2, Associativity.L, (a,b) => a * b),
-                new Operator2Args<double>("+",2, Associativity.B, (a,b) => a * b)
+                new Operator<double>("f",2, Associativity.L, (a,b) => a * b),
+                new Operator<double>("+",2, Associativity.B, (a,b) => a * b)
             };
 
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));

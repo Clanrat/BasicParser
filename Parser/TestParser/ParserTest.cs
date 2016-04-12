@@ -14,10 +14,10 @@ namespace TestParser
     {
         public List<IEvaluatable<double>> Ops = new List<IEvaluatable<double>>
         {
-            new Operator2Args<double>("+", 1, Associativity.B, (a, b) => a + b, false),
-            new Operator2Args<double>("-", 1, Associativity.L, (a, b) => a - b, false),
-            new Operator2Args<double>("*", 2, Associativity.B, (a, b) => a * b, false),
-            new Operator2Args<double>("/", 2, Associativity.L, (a, b) => a / b, false)
+            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
+            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),
+            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b, false),
+            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b, false)
 
         };
 

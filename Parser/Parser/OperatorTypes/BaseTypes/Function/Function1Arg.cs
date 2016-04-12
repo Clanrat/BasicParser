@@ -8,7 +8,7 @@ namespace Parser.OperatorTypes.BaseTypes.Function
 
         private readonly Func<T, T> _func; 
 
-        public Function1Arg(string symbol, int precedence, int inputArgs, Func<T, T> function) : base(symbol, precedence, inputArgs)
+        public Function1Arg(string symbol, int precedence, Func<T, T> function) : base(symbol, precedence, 1)
         {
             _func = function;
         }

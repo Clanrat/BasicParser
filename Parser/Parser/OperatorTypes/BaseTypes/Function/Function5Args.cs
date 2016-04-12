@@ -5,7 +5,7 @@ namespace Parser.OperatorTypes.BaseTypes.Function
     public class Function5Args<T> : BaseFunction<T>
     {
         private readonly Func<T, T, T, T, T, T> _func;
-        public Function5Args(string symbol, int precedence, int inputArgs, Func<T, T, T, T, T, T> function) : base(symbol, precedence, inputArgs)
+        public Function5Args(string symbol, int precedence, Func<T, T, T, T, T, T> function) : base(symbol, precedence, 5)
         {
             _func = function;
         }
