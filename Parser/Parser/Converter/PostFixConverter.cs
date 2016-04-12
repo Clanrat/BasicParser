@@ -32,7 +32,7 @@ namespace Parser.Converter
         private char[] Separators { get;}
         private Stack<string> Hold { get; } = new Stack<string>();
         private OperatorCollection<double> Operators { get;}
-        public PostFixConverter(OperatorCollection<double> operators, string decimalSeparators=".,")
+        public PostFixConverter(OperatorCollection<double> operators, string decimalSeparators=".")
         {
             Operators = operators;
             Separators = decimalSeparators.ToCharArray();
@@ -121,6 +121,23 @@ namespace Parser.Converter
 
                     if (!foundLeftParenthesis)
                         throw new MissMatchedParenthesisException();
+
+                    break;
+
+                case ',':
+                    var topOfstack = Hold.Peek();
+                    while (topOfstack != "(")
+                    {
+                        if (Hold.Count != 0)
+                        {
+                            result.Add(Hold.Pop());
+                            topOfstack = Hold.Peek();
+                        }
+                        else
+                        {
+                            throw new MissMatchedParenthesisException();
+                        }
+                    }
 
                     break;
                 default:

@@ -87,6 +87,22 @@ namespace TestParser
         }
 
         [TestMethod]
+        public void TestArgumentSeparator()
+        {
+            var operators = new List<IOperator<double>>
+            {
+                new Operator<double>("f",2, Associativity.L, (a,b) => a * b),
+                new Operator<double>("+",2, Associativity.B, (a,b) => a * b)
+            };
+
+            var converter = new PostFixConverter(new OperatorCollection<double>(operators));
+            var result = string.Join(" ", converter.Convert("f(3+2,5)"));
+            var expected = "3 2 + 5 f";
+            Assert.AreEqual(expected, result);
+        }
+
+
+        [TestMethod]
         public void TestMultipleParenthesis()
         {
             var converter = new PostFixConverter(new OperatorCollection<double>(Ops));

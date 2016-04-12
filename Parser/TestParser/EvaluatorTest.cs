@@ -48,6 +48,20 @@ namespace TestParser
             var expected = -1;
         }
 
+        [TestMethod]
+        public void TestMultipleArgumentEvaluation()
+        {
+            var operators = new List<IOperator<double>>
+            {
+                new Operator<double>("f",2, Associativity.L, (a,b) => a * b)
+            };
+
+            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(operators));
+            var result = evaluator.Eval("2 3 f");
+            var expected = 6;
+            Assert.AreEqual(expected, result);
+        }
+
         [ExpectedException(typeof(ArgumentException))]
         [TestMethod]
         public void TestInvalidInput()
