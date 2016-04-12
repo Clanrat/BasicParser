@@ -55,18 +55,29 @@
     <Compile Include="Evaluator\PostFixEvaluator.cs" />
     <Compile Include="FunctionParser\DefaultOperators.cs" />
     <Compile Include="Interface\IEvaluator.cs" />
-    <Compile Include="Interface\IOperator.cs" />
+    <Compile Include="Interface\IEvaluatable.cs" />
     <Compile Include="Interface\IPostFixConverter.cs" />
-    <Compile Include="OperatorTypes\BaseOperator.cs" />
-    <Compile Include="OperatorTypes\Operator.cs" />
-    <Compile Include="OperatorTypes\UnaryOperator.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\BaseFunction.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\BaseEvaluatable.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function1Arg.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function2Args.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function3Args.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function4Args.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function5Args.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Function\Function6Args.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Operator\Operator1Arg.cs" />
+    <Compile Include="OperatorTypes\BaseTypes\Operator\Operator2Args.cs" />
     <Compile Include="FunctionParser\SimpleParser.cs" />
+    <Compile Include="OperatorTypes\Function.cs" />
+    <Compile Include="OperatorTypes\Operator.cs" />
+    <Compile Include="OperatorTypes\EvaluatableParamters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

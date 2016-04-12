@@ -2,7 +2,7 @@
 
 namespace Parser.Interface
 {
-    public interface IOperator<T>
+    public interface IEvaluatable<T>
     {
         string Symbol { get; }
 

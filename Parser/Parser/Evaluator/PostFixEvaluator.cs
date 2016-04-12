@@ -67,13 +67,13 @@ namespace Parser.Evaluator
             }            
         }
 
-        private static void HandleSpecialUnaryOperator(Stack<double> output, IOperator<double> op)
+        private static void HandleSpecialUnaryOperator(Stack<double> output, IEvaluatable<double> op)
         {                        
             var arguments = OutputHelper.GetArgumentList(1, output);
             output.Push(op.Evaluate(arguments));           
         }
 
-        private static void HandleDefaultOperatorBehaviour(Stack<double> output, IOperator<double> op)
+        private static void HandleDefaultOperatorBehaviour(Stack<double> output, IEvaluatable<double> op)
         {
             var arguments = OutputHelper.GetArgumentList(op.InputArgs, output);
             output.Push(op.Evaluate(arguments));

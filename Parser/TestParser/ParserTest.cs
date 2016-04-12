@@ -5,18 +5,19 @@ using Parser.Enums;
 using Parser.FunctionParser;
 using Parser.Interface;
 using Parser.OperatorTypes;
+using Parser.OperatorTypes.BaseTypes.Operator;
 
 namespace TestParser
 {
     [TestClass]
     public class ParserTest
     {
-        public List<IOperator<double>> Ops = new List<IOperator<double>>
+        public List<IEvaluatable<double>> Ops = new List<IEvaluatable<double>>
         {
-            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
-            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),
-            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b, false),
-            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b, false)
+            new Operator2Args<double>("+", 1, Associativity.B, (a, b) => a + b, false),
+            new Operator2Args<double>("-", 1, Associativity.L, (a, b) => a - b, false),
+            new Operator2Args<double>("*", 2, Associativity.B, (a, b) => a * b, false),
+            new Operator2Args<double>("/", 2, Associativity.L, (a, b) => a / b, false)
 
         };
 

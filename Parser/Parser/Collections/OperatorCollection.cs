@@ -10,8 +10,8 @@ namespace Parser.Collections
     */
     public class OperatorCollection<T>
     {
-        private Dictionary<string, IOperator<T>> Ops { get; } = new Dictionary<string, IOperator<T>>();
-        public OperatorCollection(IEnumerable<IOperator<T>> operators)
+        private Dictionary<string, IEvaluatable<T>> Ops { get; } = new Dictionary<string, IEvaluatable<T>>();
+        public OperatorCollection(IEnumerable<IEvaluatable<T>> operators)
         {
             foreach (var op in operators)
             {
@@ -19,7 +19,7 @@ namespace Parser.Collections
             }
         }
 
-        public IOperator<T> this[string key] => Ops[key];
+        public IEvaluatable<T> this[string key] => Ops[key];
 
         public bool OperatorExists(string symbol)
         {

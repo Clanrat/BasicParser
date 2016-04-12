@@ -7,18 +7,19 @@ using Parser.Converter.Exceptions;
 using Parser.Enums;
 using Parser.Interface;
 using Parser.OperatorTypes;
+using Parser.OperatorTypes.BaseTypes.Operator;
 
 namespace TestParser
 {
     [TestClass]
     public class PostFixConverterTest
     {
-        public List<IOperator<double>> Ops = new List<IOperator<double>>
+        public List<IEvaluatable<double>> Ops = new List<IEvaluatable<double>>
         {
-            new Operator<double>("+", 1, Associativity.B, (a, b) => a + b, false),
-            new Operator<double>("-", 1, Associativity.L, (a, b) => a - b, false),
-            new Operator<double>("*", 2, Associativity.B, (a, b) => a * b, false),
-            new Operator<double>("/", 2, Associativity.L, (a, b) => a / b, false)
+            new Operator2Args<double>("+", 1, Associativity.B, (a, b) => a + b, false),
+            new Operator2Args<double>("-", 1, Associativity.L, (a, b) => a - b, false),
+            new Operator2Args<double>("*", 2, Associativity.B, (a, b) => a * b, false),
+            new Operator2Args<double>("/", 2, Associativity.L, (a, b) => a / b, false)
             
         };
 
@@ -59,11 +60,11 @@ namespace TestParser
         [TestMethod]
         public void TestMultiCharOperator()
         {
-            var operators = new List<IOperator<double>>
+            var operators = new List<IEvaluatable<double>>
             {
-                new Operator<double>("+",1, Associativity.B, (a,b) => a * b, false),
-                new Operator<double>("*",2, Associativity.B, (a,b) => a * b, false),
-                new UnaryOperator<double>("sin",1, Associativity.R, Math.Sin)
+                new Operator2Args<double>("+",1, Associativity.B, (a,b) => a * b, false),
+                new Operator2Args<double>("*",2, Associativity.B, (a,b) => a * b, false),
+                new Operator1Arg<double>("sin",1, Associativity.R, Math.Sin)
             };
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));
             var result = string.Join(" ", converter.Convert("2+sin(2)"));
@@ -74,10 +75,10 @@ namespace TestParser
         [TestMethod]
         public void TestMultiMatchedOperator()
         {
-            var operators = new List<IOperator<double>>
+            var operators = new List<IEvaluatable<double>>
             {
-                new Operator<double>("*",2, Associativity.B, (a,b) => a * b),
-                new Operator<double>("**",2, Associativity.B, (a,b) => a * b)
+                new Operator2Args<double>("*",2, Associativity.B, (a,b) => a * b),
+                new Operator2Args<double>("**",2, Associativity.B, (a,b) => a * b)
             };
 
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));
@@ -89,10 +90,10 @@ namespace TestParser
         [TestMethod]
         public void TestArgumentSeparator()
         {
-            var operators = new List<IOperator<double>>
+            var operators = new List<IEvaluatable<double>>
             {
-                new Operator<double>("f",2, Associativity.L, (a,b) => a * b),
-                new Operator<double>("+",2, Associativity.B, (a,b) => a * b)
+                new Operator2Args<double>("f",2, Associativity.L, (a,b) => a * b),
+                new Operator2Args<double>("+",2, Associativity.B, (a,b) => a * b)
             };
 
             var converter = new PostFixConverter(new OperatorCollection<double>(operators));

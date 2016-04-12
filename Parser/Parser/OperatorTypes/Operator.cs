@@ -1,41 +1,44 @@
-using System;
+﻿using System;
+using System.Runtime.InteropServices;
 using Parser.Enums;
+using Parser.Interface;
+using Parser.OperatorTypes.BaseTypes.Operator;
 
 namespace Parser.OperatorTypes
 {
-    public class Operator<T> : BaseOperator<T>
+    public class Operator<T> : IEvaluatable<T>
     {
-        private readonly Func<T, T, T> _func; 
-        private readonly Func<T, T> _unFunc;
-        public override int InputArgs { get; }
-        public override bool SpecialUnary { get; }
-        protected override Func<T, T> UnaryFunc
+        private readonly IEvaluatable<T> _op;
+        public string Symbol => _op.Symbol;
+        public int Precedence => _op.Precedence;
+        public Associativity Associativity => _op.Associativity;
+        public int InputArgs => _op.InputArgs;
+        public bool SpecialUnary => _op.SpecialUnary;
+        public T Evaluate(params T[] args)
         {
-            get
-            {
-                if(!SpecialUnary)
-                    throw new ArgumentException("Trying to use operator in unary function but operator cannot be unary");
-                return _unFunc;
-            }
-        }
-        public Operator(string symbol, int precedence, Associativity associativity, Func<T, T, T> function, bool specialUnary=false, Func<T, T> unaryFunc=null) : base(symbol, precedence, associativity)
-        {
-
-            SpecialUnary = specialUnary;
-
-            if(specialUnary && unaryFunc == null)
-                throw new ArgumentException("Expected A special unary function");
-
-            _unFunc = unaryFunc;
-
-            _func = (arg1, arg2) => Associativity == Associativity.L ? function(arg2, arg1) : function(arg1, arg2);
-
-            InputArgs = 2;
+            return _op.Evaluate(args);
         }
 
-        protected override T UseOperator(T[] args)
+        public Operator(IEvaluatable<T> op)
         {
-            return _func(args[0], args[1]);
+            _op = op;
+        }
+
+        public Operator(string symbol, int precedence, Associativity associativity, Func<T, T> function)
+        {
+            _op = new Operator1Arg<T>(symbol, precedence, associativity, function);
+        }
+        public Operator(EvaluatableParamters p, Func<T, T> function)
+        {
+            _op = new Operator1Arg<T>(p, function);
+        }
+        public Operator(string symbol, int precedence, Associativity associativity, Func<T,T,T> function, bool specialUnary = false, Func<T, T> unaryFunc = null)
+        {
+            _op = new Operator2Args<T>(symbol, precedence, associativity, function, specialUnary, unaryFunc);
+        }
+        public Operator(EvaluatableParamters p, Func<T, T, T> function, Func<T, T> unaryFunc = null)
+        {
+            _op = new Operator2Args<T>(p, function, unaryFunc);
         }
 
     }

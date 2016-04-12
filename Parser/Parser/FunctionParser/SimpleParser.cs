@@ -24,7 +24,7 @@ namespace Parser.FunctionParser
             Converter = new PostFixConverter(ops);
         }
 
-        public SimpleParser(List<IOperator<double>> ops)
+        public SimpleParser(List<IEvaluatable<double>> ops)
         {
             Evaluator = new PostFixEvaluator(new OperatorCollection<double>(ops));
             Converter = new PostFixConverter(new OperatorCollection<double>(ops));
