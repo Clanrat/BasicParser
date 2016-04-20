@@ -12,10 +12,10 @@ namespace Parser.Evaluator
     */
     public class PostFixEvaluator : IEvaluator<double>
     {
-        private OperatorCollection<double> Ops { get; }
+        private EvaluatableCollection<double> Ops { get; }
 
 
-        public PostFixEvaluator(OperatorCollection<double> ops)
+        public PostFixEvaluator(EvaluatableCollection<double> ops)
         {
             Ops = ops;
         }
@@ -31,7 +31,7 @@ namespace Parser.Evaluator
         Evaluates the input in the format of an Ienumerable, 
         Iterates over the Ienumerable checking if each token is an operator. 
         If not it gets pushed to the output stack.
-        Operators evaluates the items on the output stack and then push them back onto it          
+        Evaluatables evaluates the items on the output stack and then push them back onto it          
         */
         private double InternalEval(IEnumerable<string> input)
         {

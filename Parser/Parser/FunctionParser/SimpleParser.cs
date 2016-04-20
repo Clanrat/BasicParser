@@ -18,7 +18,7 @@ namespace Parser.FunctionParser
             Converter = converter;
         }
 
-        public SimpleParser(OperatorCollection<double> ops)
+        public SimpleParser(EvaluatableCollection<double> ops)
         {
             Evaluator = new PostFixEvaluator(ops);
             Converter = new PostFixConverter(ops);
@@ -26,13 +26,13 @@ namespace Parser.FunctionParser
 
         public SimpleParser(List<IEvaluatable<double>> ops)
         {
-            Evaluator = new PostFixEvaluator(new OperatorCollection<double>(ops));
-            Converter = new PostFixConverter(new OperatorCollection<double>(ops));
+            Evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(ops));
+            Converter = new PostFixConverter(new EvaluatableCollection<double>(ops));
         }
 
         public SimpleParser()
         {
-            var operators = DefaultOperators.Operators;
+            var operators = DefaultOperators.Evaluatables;
             Evaluator = new PostFixEvaluator(operators);
             Converter = new PostFixConverter(operators);
         }

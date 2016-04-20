@@ -25,7 +25,7 @@ namespace TestParser
         [TestMethod]
         public void TestBasicEval()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
+            var evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(Ops));
             var result = evaluator.Eval("1 2 +");
             var expected = 3;
             Assert.AreEqual(expected, result);
@@ -35,7 +35,7 @@ namespace TestParser
         [TestMethod]
         public void TestUnaryOperators()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
+            var evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(Ops));
             var result = evaluator.Eval("1 -");
             var expected = -1;
             Assert.AreEqual(expected, result);
@@ -44,7 +44,7 @@ namespace TestParser
         [TestMethod]
         public void TestAssociativity()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
+            var evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(Ops));
             var result = evaluator.Eval("1 2 -");
             var expected = -1;
         }
@@ -57,7 +57,7 @@ namespace TestParser
                 new Operator<double>("f",2, Associativity.L, (a,b) => a * b)
             };
 
-            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(operators));
+            var evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(operators));
             var result = evaluator.Eval("2 3 f");
             var expected = 6;
             Assert.AreEqual(expected, result);
@@ -67,7 +67,7 @@ namespace TestParser
         [TestMethod]
         public void TestInvalidInput()
         {
-            var evaluator = new PostFixEvaluator(new OperatorCollection<double>(Ops));
+            var evaluator = new PostFixEvaluator(new EvaluatableCollection<double>(Ops));
             var result = evaluator.Eval("+ 1 +");
             Console.WriteLine(result);
         }

@@ -43,14 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\OperatorCollection.cs" />
+    <Compile Include="Collections\EvaluatableCollection.cs" />
     <Compile Include="Converter\Exceptions\PostFixConverterException.cs" />
     <Compile Include="Converter\Helpers\OperatorHelper.cs" />
     <Compile Include="Converter\Helpers\QueueHelper.cs" />
+    <Compile Include="Converter\Helpers\InputHelper.cs" />
     <Compile Include="Converter\Helpers\TokenHelper.cs" />
     <Compile Include="Converter\PostFixConverter.cs" />
     <Compile Include="Enums\Associativity.cs" />
-    <Compile Include="Enums\TokenType.cs" />
     <Compile Include="Evaluator\Exceptions\EvaluatorException.cs" />
     <Compile Include="Evaluator\Helpers\OutputHelper.cs" />
     <Compile Include="Evaluator\PostFixEvaluator.cs" />
@@ -58,7 +58,6 @@
     <Compile Include="Interface\IEvaluator.cs" />
     <Compile Include="Interface\IEvaluatable.cs" />
     <Compile Include="Interface\IPostFixConverter.cs" />
-    <Compile Include="Interface\IToken.cs" />
     <Compile Include="OperatorTypes\BaseTypes\BaseFunction.cs" />
     <Compile Include="OperatorTypes\BaseTypes\BaseEvaluatable.cs" />
     <Compile Include="OperatorTypes\BaseTypes\Function\Function1Arg.cs" />
@@ -75,11 +74,6 @@
     <Compile Include="OperatorTypes\EvaluatableParamters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token\BaseToken.cs" />
-    <Compile Include="Token\FunctionToken.cs" />
-    <Compile Include="Token\OperatorToken.cs" />
-    <Compile Include="Token\StringToken.cs" />
-    <Compile Include="Token\ValueToken.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
