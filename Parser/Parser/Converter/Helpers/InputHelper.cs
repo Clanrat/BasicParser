@@ -46,23 +46,23 @@ namespace Parser.Converter.Helpers
                 {
                     if (opMatch.Index <= match.Index) continue;
 
-                    nextOperatorIndex = opMatch.Index + addedCharacters;
+                    nextOperatorIndex = opMatch.Index;
                     break;
                 }
                 if (nextOperatorIndex == 0)
                 {
-                    nextOperatorIndex = input.Length + 1;
+                    nextOperatorIndex = input.Length;
                 }
 
-                var behindUnaryOperatorStartingIndex = (match.Index + addedCharacters) + match.Length;
-                var distanceToNextOperator = nextOperatorIndex - behindUnaryOperatorStartingIndex - 1;
-
+                var behindUnaryOperatorStartingIndex = (match.Index) + match.Length;
+                var distanceToNextOperator = nextOperatorIndex - behindUnaryOperatorStartingIndex;
+                
                 var behindUnaryOperator = input.Substring(behindUnaryOperatorStartingIndex, distanceToNextOperator);
 
-                inpBuilder.Remove(match.Index, match.Length + behindUnaryOperator.Length);
-                inpBuilder.Insert(match.Index, string.Format(unaryOpReplacement, match.Value, behindUnaryOperator));
+                inpBuilder.Remove(match.Index + addedCharacters, match.Length + behindUnaryOperator.Length);
+                inpBuilder.Insert(match.Index + addedCharacters, string.Format(unaryOpReplacement, match.Value, behindUnaryOperator));
 
-                addedCharacters += 4;
+                addedCharacters += 3;
             }
 
             return inpBuilder.ToString();
