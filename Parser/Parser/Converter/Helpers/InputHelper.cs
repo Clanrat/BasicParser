@@ -1,13 +1,19 @@
-﻿using System.Text;
+﻿using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Parser.Collections;
 
 namespace Parser.Converter.Helpers
 {
+    /*
+    Class to modify the input for the PostFixConverter so it can be converted more easily 
+    Replaces unary operators inside function arguments with (0 operator value) and removes spaces
+             
+    */
     public class InputHelper<T>
     {
 
-        private string _ops = "";
+        private string _ops = "(,)"; //Have to recognize function separators (really shouldn't hardcode it here...)
         private string _unOps = "";
 
         private readonly EvaluatableCollection<T> _evaluatables; 
@@ -76,15 +82,10 @@ namespace Parser.Converter.Helpers
 
         private void GenerateEvaluatablePatterns(EvaluatableCollection<T> evaluatables)
         {
-            foreach (var kvp in evaluatables)
+            foreach (var kvp in evaluatables.Where(kvp => kvp.Value.SpecialUnary))
             {
-                _ops += $"({Regex.Escape(kvp.Key)})|";
-                if (kvp.Value.SpecialUnary)
-                {
-                    _unOps += $"({Regex.Escape(kvp.Key)})|";
-                }
+                _unOps += $"({Regex.Escape(kvp.Key)})|";
             }
-            _ops = _ops.TrimEnd('|');
             _unOps = _unOps.TrimEnd('|');
         }
     }
